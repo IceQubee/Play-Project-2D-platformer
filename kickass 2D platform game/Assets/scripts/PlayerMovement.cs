@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airLinearDrag = 2.5f;
     [SerializeField] private float fallMultiplier = 8f; //<--
     [SerializeField] private float lowJumpFallMultiplier = 5f; //<--
-    private bool canJump => Input.GetButtonDown("Jump") && onGround;
+    private bool canJump => Input.GetButton("Jump") && onGround;
 
     [Header("Ground Collision Variables")]
     [SerializeField] private float groundRaycastLenght = 0.7f;
