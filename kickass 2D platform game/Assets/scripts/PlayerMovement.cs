@@ -34,7 +34,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Sprite crouching;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private Vector2 standingSize;
+    [SerializeField] private Vector2 standingOffset;
     [SerializeField] private Vector2 crouchingSize;
+    [SerializeField] private Vector2 crouchingOffset;
+    private bool canStand;
+    [SerializeField] private float airRaycastLenght = 0.7f;
 
 
     private void Start()
@@ -53,11 +57,13 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRenderer.sprite = crouching;
             boxCollider.size = crouchingSize;
+            boxCollider.offset = crouchingOffset;
         }
-        if (Input.GetKeyUp(KeyCode.C))
+        if (!Input.GetKey(KeyCode.C) && !canStand)
         {
             spriteRenderer.sprite = standing;
             boxCollider.size = standingSize;
+            boxCollider.offset = standingOffset;
         }
     }
 
@@ -135,11 +141,13 @@ public class PlayerMovement : MonoBehaviour
     private void CheckCollisions()
     {
         onGround = Physics2D.Raycast(transform.position, Vector2.down, groundRaycastLenght, groundLayer);
+        canStand = Physics2D.Raycast(transform.position, Vector2.up, airRaycastLenght, groundLayer);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundRaycastLenght);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * airRaycastLenght);
     }
 }
