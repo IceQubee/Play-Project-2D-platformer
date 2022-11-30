@@ -28,14 +28,37 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundRaycastLenght = 0.7f;
     private bool onGround;
 
+    [Header("Crouching")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite standing;
+    [SerializeField] private Sprite crouching;
+    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private Vector2 standingSize;
+    [SerializeField] private Vector2 crouchingSize;
+
+
     private void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = standing;
+        standingSize = boxCollider.size;
     }
 
     private void Update()
     {
         horizontalDirection = GetInput().x;
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            spriteRenderer.sprite = crouching;
+            boxCollider.size = crouchingSize;
+        }
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            spriteRenderer.sprite = standing;
+            boxCollider.size = standingSize;
+        }
     }
 
     private void FixedUpdate()
