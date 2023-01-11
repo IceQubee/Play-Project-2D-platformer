@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8272185404610157064}
   - component: {fileID: 9153636950792991396}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,4 +146,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f9489cd589a9445a2336747b8e12b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 40
