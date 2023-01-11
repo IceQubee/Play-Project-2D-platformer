@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             boxCollider.size = standingSize;
             boxCollider.offset = standingOffset;
         }
+        FlipPlayer();
     }
 
     private void FixedUpdate()
@@ -149,5 +151,13 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundRaycastLenght);
         Gizmos.DrawLine(transform.position, transform.position + Vector3.up * airRaycastLenght);
+    }
+
+    void FlipPlayer()
+    {
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            transform.Rotate(0, 180, 0);
+        }
     }
 }
